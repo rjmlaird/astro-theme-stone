@@ -3,24 +3,22 @@ import { ViewTransitions } from 'astro:transitions';
 import Footer from '../components/layout/Footer.astro';
 import Header from '../components/layout/Header.astro';
 
-// Declare the Props interface
 interface Props {
   description: string;
   title: string;
 }
 
-// Extract props from Astro
 const { description, title } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="en" x-cloak x-data="{ dark: $store.theme.isDark }">
+<html lang="en" x-data="theme">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
@@ -28,7 +26,7 @@ const { description, title } = Astro.props;
     <ViewTransitions />
   </head>
 
-  <body x-bind:class="{ 'dark': $store.theme.isDark }" class="bg-primary-50 text-primary-950 antialiased transition">
+  <body x-bind:class="{ 'dark': isDark }" class="bg-primary-50 text-primary-950 antialiased transition">
     <Header />
     <main>
       <slot />
@@ -49,7 +47,7 @@ const { description, title } = Astro.props;
       }
 
       /* Dark Theme Colors */
-      [x-cloak].dark {
+      .dark {
         --primary-bg: #0c4d53; /* Deep Space Green-Blue */
         --primary-text: #ffffff; /* Pure White */
         --secondary-bg: #2cffb7; /* Luminous Aqua */
@@ -74,13 +72,13 @@ const { description, title } = Astro.props;
     </style>
 
     <!-- Alpine.js Plugins: Import plugins first -->
-    <script src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.14.8/dist/collapse.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@3.14.8/dist/focus.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.14.8/dist/intersect.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@alpinejs/mask@3.14.8/dist/mask.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.0.0/dist/collapse.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@3.0.0/dist/focus.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.0.0/dist/intersect.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@alpinejs/mask@3.0.0/dist/mask.min.js"></script>
 
     <!-- Alpine.js Core -->
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.9/dist/cdn.min.js" defer></script>
 
     <script type="module">
       // Register plugins with Alpine.js
@@ -92,13 +90,11 @@ const { description, title } = Astro.props;
       // Define the theme store for dark mode
       Alpine.store('theme', {
         init() {
-          // Retrieve theme from localStorage, or use the system's preference
           const storedTheme = localStorage.getItem('theme');
           this.isDark = storedTheme ? storedTheme === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
         },
         isDark: false,
         toggle() {
-          // Toggle theme between light and dark
           this.isDark = !this.isDark;
           localStorage.setItem('theme', this.isDark ? 'dark' : 'light');
         },
