@@ -11,7 +11,7 @@
     "clean": "rm -rf node_modules package-lock.json"
   },
   "dependencies": {
-    "@alpinejs/collapse": "3.12.3",
+    "@alpinejs/collapse": "^3.12.3",
     "@alpinejs/focus": "^3.14.9",
     "@alpinejs/intersect": "^3.14.9",
     "@alpinejs/mask": "^3.14.9",

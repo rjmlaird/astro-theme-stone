@@ -6,7 +6,7 @@ const { description = "Default description", title = "Default title" } = Astro.p
 ---
 
 <!DOCTYPE html>
-<html lang="en" x-data="theme">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
@@ -19,81 +19,100 @@ const { description = "Default description", title = "Default title" } = Astro.p
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png" />
     <link rel="manifest" href="/site.webmanifest" />
 
-    <!-- Alpine.js Core + Plugins (Bundled Builds) -->
-    <script defer src="https://unpkg.com/alpinejs@3.13.10/dist/cdn.min.js"></script>
-    <script defer src="https://unpkg.com/@alpinejs/collapse@3.13.10/dist/cdn.min.js"></script>
-    <script defer src="https://unpkg.com/@alpinejs/focus@3.13.10/dist/cdn.min.js"></script>
-    <script defer src="https://unpkg.com/@alpinejs/intersect@3.13.10/dist/cdn.min.js"></script>
-    <script defer src="https://unpkg.com/@alpinejs/mask@3.13.10/dist/cdn.min.js"></script>
-  </head>
+    <!-- Alpine.js Core (ensure it's loaded before any Alpine directives) -->
+    <script defer src="/assets/js/alpine.js"></script>
 
-  <body x-bind:class="{ 'dark': $store.theme.isDark }" class="bg-primary-50 text-primary-950 antialiased transition">
-    <Header />
-    <main>
-      <slot />
-    </main>
-    <Footer />
-
+    <!-- Alpine.js Plugins -->
+    <script defer src="/assets/js/alpine-collapse.js"></script>
+    <script defer src="/assets/js/alpine-focus.js"></script>
+    <script defer src="/assets/js/alpine-intersect.js"></script>
+    <script defer src="/assets/js/alpine-mask.js"></script>
+    
+    <!-- Load CSS and JS for dark theme and view transition -->
     <style is:global>
       [x-cloak] {
         display: none !important;
       }
-
       :root {
         --primary-bg: #ffffff;
         --primary-text: #127780;
         --secondary-bg: #15eda3;
         --secondary-text: #0fc083;
       }
-
       .dark {
         --primary-bg: #0c4d53;
         --primary-text: #ffffff;
         --secondary-bg: #2cffb7;
         --secondary-text: #30c6d3;
       }
-
       body {
         background-color: var(--primary-bg);
         color: var(--primary-text);
         font-family: 'Radnika Next', sans-serif;
       }
-
       header, footer {
         background-color: var(--secondary-bg);
         color: var(--secondary-text);
       }
     </style>
+    
+  </head>
 
-    <!-- Alpine Store Initialization -->
+  <body x-data="theme" x-bind:class="{ 'dark': $store.theme.isDark }" class="bg-primary-50 text-primary-950 antialiased transition">
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+    
+    <!-- Alpine Store Initialization (for theme management) -->
     <script>
       document.addEventListener("alpine:init", () => {
         Alpine.store('theme', {
-          isDark: false, // Initialize the theme with a default value
+          isDark: false,  // Default theme is light
           toggle() {
-            this.isDark = !this.isDark; // Toggle the theme state
+            this.isDark = !this.isDark;  // Toggle between dark and light themes
           }
         });
+
+        // Confirm that Alpine has been initialized
+        console.log("✅ Alpine.js initialized and theme store created.");
       });
     </script>
 
-    <!-- View Transition Polyfill or Feature-Detect -->
+    <!-- Alpine.js Initialization (ensure Alpine is fully loaded) -->
     <script>
       document.addEventListener("DOMContentLoaded", () => {
+        // Alpine is ready
+        window.Alpine.start();
+        console.log("✅ Alpine.js started.");
+      });
+    </script>
+
+    <!-- View Transition Script (Ensure polyfill or feature detection is applied) -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Check if ViewTransition API is supported by the browser
         if ('startViewTransition' in document) {
-          document.startViewTransition(() => {
-            console.log('ViewTransition started.');
+          // Create a ViewTransition for page transitions
+          const body = document.body;
+          const transition = new ViewTransition({
+            root: body, 
+            mode: "default", 
           });
+
+          transition.enter();  // Start transition on page load
+          console.log("✅ ViewTransition initialized.");
         } else {
-          console.warn("ViewTransition API not supported.");
+          console.warn("⚠️ ViewTransition API not supported.");
         }
       });
     </script>
-
-    <!-- Alpine Initialization Confirmation -->
+    
+    <!-- Debugging for Alpine.js Initialization -->
     <script>
-      document.addEventListener("alpine:init", () => {
-        console.log("✅ Alpine.js loaded and initialized.");
+      window.addEventListener('alpine:init', () => {
+        console.log("✅ Alpine.js initialized.");
       });
     </script>
   </body>
