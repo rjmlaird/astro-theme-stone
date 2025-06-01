@@ -1,4 +1,5 @@
 ---
+// Import any required styles or other components
 const bottomLinks = [
   {
     header: 'Social',
@@ -78,5 +79,28 @@ const bottomLinks = [
 ];
 ---
 
-<!-- Your footer component layout HTML code here -->
-
+<footer class="bg-primary-950 text-primary-200 py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-16">
+      {bottomLinks.map(section => (
+        <div>
+          <h3 class="text-xl font-semibold mb-4">{section.header}</h3>
+          <ul class="space-y-4">
+            {section.links.map(link => (
+              <li>
+                <a 
+                  href={link.href} 
+                  target={link.isExternal ? '_blank' : '_self'}
+                  rel={link.isExternal ? 'noopener noreferrer' : ''}
+                  class="text-primary-100 hover:text-primary-50 transition-colors"
+                >
+                  {link.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</footer>
