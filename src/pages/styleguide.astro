@@ -1,56 +1,39 @@
----
 import Layout from '../layouts/Layout.astro';
 
-const colors = [
+const primaryColors = [
   {
-    name: 'white',
+    name: 'Vibrant Green',
+    hex: '#15eda3',
+  },
+  {
+    name: 'Deep Teal',
+    hex: '#127780',
+  },
+  {
+    name: 'Bold Turquoise',
+    hex: '#0fc083',
+  },
+  {
+    name: 'Pure White',
     hex: '#ffffff',
   },
+];
+
+const secondaryColors = [
   {
-    name: '50',
-    hex: '#fafaf9',
+    name: 'Luminous Aqua',
+    hex: '#2cffb7',
   },
   {
-    name: '100',
-    hex: '#f5f5f4',
+    name: 'Cool Ocean Blue',
+    hex: '#30c6d3',
   },
   {
-    name: '200',
-    hex: '#e7e5e4',
-  },
-  {
-    name: '300',
-    hex: '#d6d3d1',
-  },
-  {
-    name: '400',
-    hex: '#a8a29e',
-  },
-  {
-    name: '500',
-    hex: '#78716c',
-  },
-  {
-    name: '600',
-    hex: '#57534e',
-  },
-  {
-    name: '700',
-    hex: '#44403c',
-  },
-  {
-    name: '800',
-    hex: '#292524',
-  },
-  {
-    name: '900',
-    hex: '#1c1917',
-  },
-  {
-    name: '950',
-    hex: '#0c0a09',
+    name: 'Deep Space Green-Blue',
+    hex: '#0c4d53',
   },
 ];
+
 ---
 
 <Layout description="Style guide for Stone premium Astro theme" title="Styleguide · Stone">
@@ -59,6 +42,44 @@ const colors = [
       <h1 class="text-4xl font-medium tracking-tight sm:text-5xl lg:text-6xl">Styleguide</h1>
     </div>
   </header>
+
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+      <div class="flex flex-col gap-16">
+        <h2 class="text-3xl font-medium tracking-tight sm:text-4xl">Primary Brand Colors</h2>
+        <div class="grid grid-cols-2 gap-12 sm:grid-cols-4">
+          {primaryColors.map((color) => (
+            <div class="relative flex">
+              <div class="flex flex-col gap-2">
+                <div
+                  class="border-primary-900/10 dark:border-primary-300/10 h-16 w-16 rounded-md border"
+                  style={`background-color: ${color.hex}`}
+                />
+                <div class="text-sm font-medium">{color.name}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-16">
+        <h2 class="text-3xl font-medium tracking-tight sm:text-4xl">Secondary Brand Colors</h2>
+        <div class="grid grid-cols-2 gap-12 sm:grid-cols-3">
+          {secondaryColors.map((color) => (
+            <div class="relative flex">
+              <div class="flex flex-col gap-2">
+                <div
+                  class="border-primary-900/10 dark:border-primary-300/10 h-16 w-16 rounded-md border"
+                  style={`background-color: ${color.hex}`}
+                />
+                <div class="text-sm font-medium">{color.name}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
 
   <section class="py-16 sm:py-20">
     <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
