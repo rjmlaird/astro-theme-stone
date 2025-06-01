@@ -8,4 +8,9 @@ export default defineConfig({
     viewTransitions: true,
   },
   integrations: [tailwind(), compress()],
+  buildOptions: {
+    // Set the output directory for the build
+    output: './dist',  // Make sure the build output is placed in 'dist'
+    // Optional: You can configure other build-related options as needed
+  },
 });
