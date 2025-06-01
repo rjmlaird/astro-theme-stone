@@ -1,22 +1,3 @@
----
-import { ViewTransitions } from 'astro:transitions';
-import Footer from '../components/layout/Footer.astro';
-import Header from '../components/layout/Header.astro';
-
-import Alpine from 'alpinejs';
-import AlpineCollapse from '@alpinejs/collapse';
-import AlpineFocus from '@alpinejs/focus';
-import AlpineIntersect from '@alpinejs/intersect';
-import AlpineMask from '@alpinejs/mask';
-
-interface Props {
-  description: string;
-  title: string;
-}
-
-const { description, title } = Astro.props;
----
-
 <!DOCTYPE html>
 <html lang="en" x-data="theme">
   <head>
@@ -86,16 +67,20 @@ const { description, title } = Astro.props;
     <script type="module" src="/path/to/alpine-intersect.js" defer></script>
     <script type="module" src="/path/to/alpine-mask.js" defer></script>
 
-<!-- Alpine Initialization Script -->
-<script type="module">
-  // Initialize Alpine.js and register plugins
-  window.Alpine = Alpine;
-  Alpine.plugin(AlpineCollapse);
-  Alpine.plugin(AlpineFocus);
-  Alpine.plugin(AlpineIntersect);
-  Alpine.plugin(AlpineMask);
+    <!-- Alpine Initialization Script -->
+    <script type="module">
+      // Ensure Alpine.js is fully loaded before initializing
+      document.addEventListener("DOMContentLoaded", () => {
+        // Initialize Alpine.js and register plugins
+        window.Alpine = Alpine;
+        Alpine.plugin(AlpineCollapse);
+        Alpine.plugin(AlpineFocus);
+        Alpine.plugin(AlpineIntersect);
+        Alpine.plugin(AlpineMask);
 
-  // Start Alpine.js
-  Alpine.start();
-</script>
-
+        // Start Alpine.js
+        Alpine.start();
+      });
+    </script>
+  </body>
+</html>
