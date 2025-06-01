@@ -7,4 +7,9 @@ export default defineConfig({
   buildOptions: {
     outDir: './dist',
   },
+  vite: {
+    server: {
+      hmr: true, // Hot Module Reloading for local development
+    },
+  },
 });
