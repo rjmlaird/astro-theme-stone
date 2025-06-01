@@ -14,7 +14,7 @@ const { description, title } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="en" x-cloak x-data="{ dark: $store.theme.isDark }">
+<html lang="en" x-cloak>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
@@ -28,7 +28,7 @@ const { description, title } = Astro.props;
     <ViewTransitions />
   </head>
 
-  <body x-bind:class="{ 'dark': $store.theme.isDark }" class="bg-primary-50 text-primary-950 antialiased transition">
+  <body x-data="{ dark: $store.theme.isDark }" x-bind:class="{ 'dark': dark }" class="bg-primary-50 text-primary-950 antialiased transition">
     <Header />
     <main>
       <slot />
@@ -49,7 +49,7 @@ const { description, title } = Astro.props;
       }
 
       /* Dark Theme Colors */
-      [x-cloak].dark {
+      .dark {
         --primary-bg: #0c4d53; /* Deep Space Green-Blue */
         --primary-text: #ffffff; /* Pure White */
         --secondary-bg: #2cffb7; /* Luminous Aqua */
