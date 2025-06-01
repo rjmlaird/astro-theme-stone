@@ -9,7 +9,6 @@ import AlpineFocus from '@alpinejs/focus';
 import AlpineIntersect from '@alpinejs/intersect';
 import AlpineMask from '@alpinejs/mask';
 
-
 interface Props {
   description: string;
   title: string;
@@ -78,36 +77,19 @@ const { description, title } = Astro.props;
       }
     </style>
 
-    <!-- Alpine.js Core & Plugins (local scripts) -->
-    <script type="module" defer src="/alpine.js"></script>
-    <script type="module" defer src="/alpine-collapse.js"></script>
-    <script type="module" defer src="/alpine-focus.js"></script>
-    <script type="module" defer src="/alpine-intersect.js"></script>
-    <script type="module" defer src="/alpine-mask.js"></script>
+    <!-- Alpine.js Core -->
+    <script type="module" src="/path/to/alpine.js" defer></script>
 
+    <!-- Alpine.js Plugins -->
+    <script type="module" src="/path/to/alpine-collapse.js" defer></script>
+    <script type="module" src="/path/to/alpine-focus.js" defer></script>
+    <script type="module" src="/path/to/alpine-intersect.js" defer></script>
+    <script type="module" src="/path/to/alpine-mask.js" defer></script>
+
+    <!-- Alpine Initialization Script -->
     <script type="module">
-      // Register plugins with Alpine.js
+      // Initialize Alpine.js and register plugins
+      window.Alpine = Alpine;
       Alpine.plugin(AlpineCollapse);
       Alpine.plugin(AlpineFocus);
-      Alpine.plugin(AlpineIntersect);
-      Alpine.plugin(AlpineMask);
-
-      // Dark Mode Store
-      Alpine.store('theme', {
-        init() {
-          const storedTheme = localStorage.getItem('theme');
-          this.isDark = storedTheme ? storedTheme === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
-        },
-        isDark: false,
-        toggle() {
-          this.isDark = !this.isDark;
-          localStorage.setItem('theme', this.isDark ? 'dark' : 'light');
-        },
-      });
-
-      // Initialize Alpine.js
-      window.Alpine = Alpine;
-      Alpine.start();
-    </script>
-  </body>
-</html>
+      Alpine.plugin(AlpineIntersect
