@@ -1,6 +1,6 @@
 ---
-import Header from '../components/Header.astro';  // Adjust the path as needed
-import Footer from '../components/Footer.astro';  // Adjust the path as needed
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
 ---
 
 <html lang="en">
@@ -16,14 +16,16 @@ import Footer from '../components/Footer.astro';  // Adjust the path as needed
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png" />
     <link rel="manifest" href="/site.webmanifest" />
 
-    <!-- Alpine.js Core (ensure it's loaded before any Alpine directives) -->
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.10.2/dist/cdn.min.js"></script>
+      <!-- Alpine.js Core (ensure it's loaded before any Alpine directives) -->
+    <script defer src="https://github.com/alpinejs/alpine/tree/main/packages/alpinejs/src/alpine.js"></script>
 
     <!-- Alpine.js Plugins -->
-    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@2.0.0/dist/cdn.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@2.0.0/dist/cdn.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@2.0.0/dist/cdn.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/mask@2.0.0/dist/cdn.min.js"></script>
+    <script defer src="https://github.com/alpinejs/alpine/blob/main/packages/alpinejs/src/plugin.js"</script>    
+    <script defer src="https://github.com/alpinejs/alpine/tree/main/packages/alpinejs/src/index.js"></script>
+    <script defer src="https://github.com/alpinejs/alpine/tree/main/packages/collapse/src/index.js"></script>
+    <script defer src="https://github.com/alpinejs/alpine/tree/main/packages/focus/src/index.js"></script>
+    <script defer src="https://github.com/alpinejs/alpine/tree/main/packages/intersect/src/index.js"></script>
+    <script defer src="https://github.com/alpinejs/alpine/tree/main/packages/mask/src/index.js"></script>
 
     <!-- Load CSS and JS for dark theme and view transition -->
     <style is:global>
@@ -52,7 +54,6 @@ import Footer from '../components/Footer.astro';  // Adjust the path as needed
         color: var(--secondary-text);
       }
     </style>
-    
   </head>
 
   <body x-data="theme" x-bind:class="{ 'dark': $store.theme.isDark }" class="bg-primary-50 text-primary-950 antialiased transition">
@@ -90,6 +91,7 @@ import Footer from '../components/Footer.astro';  // Adjust the path as needed
       });
     </script>
 
+    <!-- View Transition API (after Alpine.js is initialized) -->
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         // Check if the ViewTransition API is supported
@@ -135,7 +137,7 @@ import Footer from '../components/Footer.astro';  // Adjust the path as needed
         opacity: 1;
       }
     </style>
-    
+
     <!-- Debugging for Alpine.js Initialization -->
     <script>
       window.addEventListener('alpine:init', () => {
@@ -144,3 +146,4 @@ import Footer from '../components/Footer.astro';  // Adjust the path as needed
     </script>
   </body>
 </html>
+
