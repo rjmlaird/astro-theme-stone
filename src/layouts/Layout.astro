@@ -13,7 +13,7 @@ const { description, title } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="en" x-cloak x-data :class="{ 'dark': $store.theme.isDark }">
+<html lang="en" x-cloak x-data="{ 'dark': $store.theme.isDark }">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
@@ -26,19 +26,18 @@ const { description, title } = Astro.props;
     <title>{title}</title>
     <ViewTransitions />
   </head>
-  <body
-    class="bg-primary-50 text-primary-950 dark:bg-primary-950 dark:text-primary-200 antialiased transition"
-  >
+  <body class="bg-primary-50 text-primary-950 dark:bg-primary-950 dark:text-primary-200 antialiased transition">
     <Header />
     <main>
       <slot />
     </main>
     <Footer />
+    
     <style is:global>
       [x-cloak] {
         display: none !important;
       }
-      
+
       /* Light Theme Colors */
       :root {
         --primary-bg: #ffffff; /* Pure White */
@@ -75,7 +74,8 @@ const { description, title } = Astro.props;
         color: var(--primary-bg);
       }
     </style>
-    <script>
+    
+    <script type="module">
       import Alpine from 'alpinejs';
       import collapse from '@alpinejs/collapse';
 
