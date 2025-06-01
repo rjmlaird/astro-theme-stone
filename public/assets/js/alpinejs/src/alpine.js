@@ -1,25 +1,32 @@
-import { setReactivityEngine, disableEffectScheduling, reactive, effect, release, raw, watch } from './reactivity'
-import { mapAttributes, directive, setPrefix as prefix, prefix as prefixed } from './directives'
-import { start, addRootSelector, addInitSelector, closestRoot, findClosest, initTree, destroyTree, interceptInit } from './lifecycle'
-import { onElRemoved, onAttributeRemoved, onAttributesAdded, mutateDom, deferMutations, flushAndStopDeferringMutations, startObservingMutations, stopObservingMutations } from './mutation'
-import { mergeProxies, closestDataStack, addScopeToNode, scope as $data } from './scope'
-import { setEvaluator, evaluate, evaluateLater, dontAutoEvaluateFunctions } from './evaluator'
-import { transition } from './directives/x-transition'
-import { clone, cloneNode, skipDuringClone, onlyDuringClone, interceptClone } from './clone'
-import { interceptor } from './interceptor'
-import { getBinding as bound, extractProp } from './utils/bind'
-import { debounce } from './utils/debounce'
-import { throttle } from './utils/throttle'
-import { setStyles } from './utils/styles'
-import { entangle } from './entangle'
-import { nextTick } from './nextTick'
-import { walk } from './utils/walk'
-import { plugin } from './plugin'
-import { magic } from './magics'
-import { store } from './store'
-import { bind } from './binds'
-import { data } from './datas'
+// Import Alpine.js plugins
+import anchor from '@alpinejs/anchor'
+import collapse from '@alpinejs/collapse'
+import csp from '@alpinejs/csp'
+//import docs from '@alpinejs/docs'
+import focus from '@alpinejs/focus'
+import intersect from '@alpinejs/intersect'
+import mask from '@alpinejs/mask'
+import morph from '@alpinejs/morph'
+import persist from '@alpinejs/persist'
+import resize from '@alpinejs/resize'
+import sort from '@alpinejs/sort'
+import ui from '@alpinejs/ui'
 
+// Initialize Alpine.js plugins
+Alpine.plugin(anchor)
+Alpine.plugin(collapse)
+Alpine.plugin(csp)
+//Alpine.plugin(docs)
+Alpine.plugin(focus)
+Alpine.plugin(intersect)
+Alpine.plugin(mask)
+Alpine.plugin(morph)
+Alpine.plugin(persist)
+Alpine.plugin(resize)
+Alpine.plugin(sort)
+Alpine.plugin(ui)
+
+// Define Alpine.js object
 let Alpine = {
     get reactive() { return reactive },
     get release() { return release },
@@ -79,4 +86,5 @@ let Alpine = {
     bind,
 }
 
+// Export Alpine.js object
 export default Alpine

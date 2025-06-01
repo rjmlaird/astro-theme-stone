@@ -24,10 +24,12 @@ import Footer from '../components/layout/Footer.astro';
     <script defer src="public/assets/js/alpinejs/dist/cdn.min.js" type="module"></script>
 
     <!-- Alpine.js Plugins -->
+    <script defer src="public/assets/js/@alpinejs/collapse/dist/cdn.min.js" crossorigin="anonymous" ></script>
+    console.log(Alpine.plugin)  // Check if collapse and other plugins are in the list
+
     <script defer src="public/assets/js/alpinejs/src/plugin.js" crossorigin="anonymous"</script>    
     <script defer src="public/assets/js/@alpinejs/anchor/dist/cdn.min.js" crossorigin="anonymous"></script>
     <script defer src="public/assets/js/@alpinejs/intersect/dist/cdn.min.js" crossorigin="anonymous"></script>
-    <script defer src="public/assets/js/@alpinejs/collapse/dist/cdn.min.js" crossorigin="anonymous" ></script>
     <script defer src="public/assets/js/@alpinejs/csp/dist/cdn.min.js" crossorigin="anonymous"></script>
     <script defer src="public/assets/js/@alpinejs/docs/dist/cdn.min.js" crossorigin="anonymous"></script>
     <script defer src="public/assets/js/@alpinejs/focus/dist/cdn.min.js" crossorigin="anonymous"></script>
