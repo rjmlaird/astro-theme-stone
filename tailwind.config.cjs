@@ -13,7 +13,7 @@ module.exports = {
       primary: colors.stone,
     },
     fontFamily: {
-      sans: ['Inter', 'sans-serif'],
+      sans: ['Radnika Next', 'Inter', 'sans-serif'], // Radnika Next added first
     },
     fontSize: {
       xs: ['0.75rem', '1rem'],

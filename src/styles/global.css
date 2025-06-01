@@ -1,0 +1,23 @@
+/* src/styles/global.css */
+
+/* Define Radnika Next font */
+@font-face {
+  font-family: 'Radnika Next';
+  src: url('/fonts/radnika-next/radnika-next-medium.woff2') format('woff2'),
+       url('/fonts/radnika-next/radnika-next-medium.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Radnika Next';
+  src: url('/fonts/radnika-next/radnika-next-medium.woff2') format('woff2'),
+       url('/fonts/radnika-next/radnika-next-medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+/* Optional: Set a fallback */
+body {
+  font-family: 'Radnika Next', 'Inter', sans-serif;
+}
