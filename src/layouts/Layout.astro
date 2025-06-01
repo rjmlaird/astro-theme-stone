@@ -3,6 +3,12 @@ import { ViewTransitions } from 'astro:transitions';
 import Footer from '../components/layout/Footer.astro';
 import Header from '../components/layout/Header.astro';
 
+import Alpine from 'alpinejs';
+import AlpineCollapse from '@alpinejs/collapse';
+import AlpineFocus from '@alpinejs/focus';
+import AlpineIntersect from '@alpinejs/intersect';
+import AlpineMask from '@alpinejs/mask';
+
 interface Props {
   description: string;
   title: string;
@@ -40,25 +46,25 @@ const { description, title } = Astro.props;
 
       /* Light Theme Colors */
       :root {
-        --primary-bg: #ffffff; /* Pure White */
-        --primary-text: #127780; /* Deep Teal */
-        --secondary-bg: #15eda3; /* Vibrant Green */
-        --secondary-text: #0fc083; /* Bold Turquoise */
+        --primary-bg: #ffffff;
+        --primary-text: #127780;
+        --secondary-bg: #15eda3;
+        --secondary-text: #0fc083;
       }
 
       /* Dark Theme Colors */
       .dark {
-        --primary-bg: #0c4d53; /* Deep Space Green-Blue */
-        --primary-text: #ffffff; /* Pure White */
-        --secondary-bg: #2cffb7; /* Luminous Aqua */
-        --secondary-text: #30c6d3; /* Cool Ocean Blue */
+        --primary-bg: #0c4d53;
+        --primary-text: #ffffff;
+        --secondary-bg: #2cffb7;
+        --secondary-text: #30c6d3;
       }
 
       /* Global Styles */
       body {
         background-color: var(--primary-bg);
         color: var(--primary-text);
-        font-family: 'Radnika Next', sans-serif; /* Applying Radnika Next font */
+        font-family: 'Radnika Next', sans-serif;
       }
 
       header {
@@ -71,15 +77,7 @@ const { description, title } = Astro.props;
       }
     </style>
 
-    <!-- Alpine.js Plugins: Import plugins first -->
-    <script src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.0.0/dist/collapse.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@3.0.0/dist/focus.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.0.0/dist/intersect.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@alpinejs/mask@3.0.0/dist/mask.min.js"></script>
-
-    <!-- Alpine.js Core -->
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.9/dist/cdn.min.js" defer></script>
-
+    <!-- Alpine.js Core & Plugins -->
     <script type="module">
       // Register plugins with Alpine.js
       Alpine.plugin(AlpineCollapse);
@@ -87,7 +85,7 @@ const { description, title } = Astro.props;
       Alpine.plugin(AlpineIntersect);
       Alpine.plugin(AlpineMask);
 
-      // Define the theme store for dark mode
+      // Dark Mode Store
       Alpine.store('theme', {
         init() {
           const storedTheme = localStorage.getItem('theme');
@@ -100,7 +98,7 @@ const { description, title } = Astro.props;
         },
       });
 
-      // Start Alpine.js
+      // Initialize Alpine.js
       window.Alpine = Alpine;
       Alpine.start();
     </script>
