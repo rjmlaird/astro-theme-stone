@@ -1,6 +1,5 @@
 ---
 import { ViewTransitions } from 'astro:transitions';
-import '../styles/global.css';  // Make sure this path is correct
 import Footer from '../components/layout/Footer.astro';
 import Header from '../components/layout/Header.astro';
 
@@ -10,11 +9,9 @@ interface Props {
   title: string;
 }
 
-
 // Extract props from Astro
 const { description, title } = Astro.props;
 ---
-
 
 <!DOCTYPE html>
 <html lang="en" x-cloak x-data="{ 'dark': $store.theme.isDark }">
@@ -29,10 +26,10 @@ const { description, title } = Astro.props;
     <meta name="description" content={description} />
     <title>{title}</title>
     <ViewTransitions />
-
-    <!-- Include the local font files -->
-    //<link rel="stylesheet" href="/fonts/radnika-next/radnika-next-regular.css">
-    <link rel="stylesheet" href="/fonts/radnika-next/radnika-next-medium.css">
+    
+    <!-- Import Fonts from /public/fonts -->
+    <link rel="stylesheet" href="/fonts/radnika-next/radnika-next-medium.css" />
+   // <link rel="stylesheet" href="/fonts/radnika-next/radnika-next-regular.css" />
   </head>
   <body class="bg-primary-50 text-primary-950 dark:bg-primary-950 dark:text-primary-200 antialiased transition">
     <Header />
@@ -41,6 +38,7 @@ const { description, title } = Astro.props;
     </main>
     <Footer />
     
+    <!-- Global Styles -->
     <style is:global>
       [x-cloak] {
         display: none !important;
@@ -66,7 +64,7 @@ const { description, title } = Astro.props;
       body {
         background-color: var(--primary-bg);
         color: var(--primary-text);
-        font-family: 'Radnika Next', sans-serif; /* Applying Radnika Next font */
+        font-family: 'RadnikaNext-Medium', sans-serif; /* Applying Radnika Next font */
       }
 
       header {
@@ -84,9 +82,11 @@ const { description, title } = Astro.props;
       }
     </style>
     
+    <!-- Alpine.js for Theme Toggle -->
     <script type="module">
-      import Alpine from 'alpinejs';
-      import collapse from '@alpinejs/collapse';
+      // Import Alpine.js from CDN
+      import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js';
+      import collapse from 'https://cdn.jsdelivr.net/npm/@alpinejs/collapse@2.8.2/dist/collapse.min.js';
 
       Alpine.plugin(collapse);
 
