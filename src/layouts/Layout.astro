@@ -1,114 +1,37 @@
 ---
-import { ViewTransitions } from 'astro:transitions';
-import Footer from '../components/layout/Footer.astro';
-import Header from '../components/layout/Header.astro';
+import { LayoutProps } from '../types';
 
-// Declare the Props interface
-interface Props {
-  description: string;
-  title: string;
-}
-
-// Extract props from Astro
-const { description, title } = Astro.props;
+const { children } = LayoutProps;
 ---
 
 <!DOCTYPE html>
-<html lang="en" x-cloak x-data="{ 'dark': $store.theme.isDark }">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="manifest" href="/site.webmanifest" />
-    <meta name="generator" content={Astro.generator} />
-    <meta name="description" content={description} />
-    <title>{title}</title>
-    <ViewTransitions />
-  </head>
-  <body class="bg-primary-50 text-primary-950 dark:bg-primary-950 dark:text-primary-200 antialiased transition">
-    <Header />
-    <main>
-      <slot />
-    </main>
-    <Footer />
-    
-    <style is:global>
-      [x-cloak] {
-        display: none !important;
-      }
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alpine.js Example</title>
 
-      /* Light Theme Colors */
-      :root {
-        --primary-bg: #ffffff; /* Pure White */
-        --primary-text: #127780; /* Deep Teal */
-        --secondary-bg: #15eda3; /* Vibrant Green */
-        --secondary-text: #0fc083; /* Bold Turquoise */
-      }
+  <!-- Alpine.js CDN -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.1/dist/cdn.min.js"></script>
+  
+  <script>
+    // Alpine.js initialization event listener
+    document.addEventListener('alpine:initialized', () => {
+      console.log('Alpine initialized');
+    });
+  </script>
+</head>
 
-      /* Dark Theme Colors */
-      [x-cloak].dark {
-        --primary-bg: #0c4d53; /* Deep Space Green-Blue */
-        --primary-text: #ffffff; /* Pure White */
-        --secondary-bg: #2cffb7; /* Luminous Aqua */
-        --secondary-text: #30c6d3; /* Cool Ocean Blue */
-      }
+<body>
+  <!-- Example Button with No Alpine Context -->
+  <button x-on:click="console.log('no-data')">no-data</button>
 
-      /* Global Styles */
-      body {
-        background-color: var(--primary-bg);
-        color: var(--primary-text);
-        font-family: 'Radnika Next', sans-serif; /* Applying Radnika Next font */
-      }
+  <!-- Alpine Component with x-data -->
+  <div x-data="{}">
+    <button x-on:click="console.log('x-data')">x-data</button>
+  </div>
 
-      header {
-        background-color: var(--secondary-bg);
-      }
-
-      footer {
-        background-color: var(--secondary-bg);
-        color: var(--secondary-text);
-      }
-
-      .button {
-        background-color: var(--secondary-bg);
-        color: var(--primary-bg);
-      }
-    </style>
-
-    <!-- Alpine.js Plugins: Import plugins first -->
-    <script src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.0.0/dist/collapse.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@3.0.0/dist/focus.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.0.0/dist/intersect.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@alpinejs/mask@3.0.0/dist/mask.min.js"></script>
-
-    <!-- Alpine.js Core -->
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js" defer></script>
-
-    <script type="module">
-      // Register plugins with Alpine.js
-      Alpine.plugin(AlpineCollapse);
-      Alpine.plugin(AlpineFocus);
-      Alpine.plugin(AlpineIntersect);
-      Alpine.plugin(AlpineMask);
-
-      // Define the theme store for dark mode
-      Alpine.store('theme', {
-        init() {
-          const storedTheme = localStorage.getItem('theme');
-          this.isDark = storedTheme ? storedTheme === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
-        },
-        isDark: false,
-        toggle() {
-          this.isDark = !this.isDark;
-          localStorage.setItem('theme', this.isDark ? 'dark' : 'light');
-        },
-      });
-
-      // Start Alpine.js
-      window.Alpine = Alpine;
-      Alpine.start();
-    </script>
-  </body>
+  <!-- Inject content passed to layout -->
+  <div>{children}</div>
+</body>
 </html>
