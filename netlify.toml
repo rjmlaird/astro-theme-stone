@@ -2,19 +2,36 @@
   publish = "dist"
   command = "astro build"
 
+# CORS for static assets (e.g., images, CSS, JS)
 [[headers]]
   for = "/assets/*"
   [headers.values]
+    # Allow only specific origin for security purposes
     Access-Control-Allow-Origin = "https://greenorbit-web.netlify.app"
+    # Allow common HTTP methods
+    Access-Control-Allow-Methods = "GET, POST, OPTIONS"
+    # Allow required headers (Content-Type, Authorization, etc.)
+    Access-Control-Allow-Headers = "Content-Type, Authorization, X-Requested-With"
+    # Enable credentials to be sent with requests (cookies, HTTP authentication)
+    Access-Control-Allow-Credentials = "true"
+    # Cache preflight request results for 1 hour
+    Access-Control-Max-Age = "3600"
+
+# CORS for index.js file
+[[headers]]
+  for = "/index.js"
+  [headers.values]
+    # Allow all origins for index.js (if you're serving JS from multiple domains)
+    Access-Control-Allow-Origin = "*"
     Access-Control-Allow-Methods = "GET, POST, OPTIONS"
     Access-Control-Allow-Headers = "Content-Type, Authorization, X-Requested-With"
     Access-Control-Allow-Credentials = "true"
     Access-Control-Max-Age = "3600"
 
+# CORS for preflight requests (allowing OPTIONS method globally)
 [[headers]]
-  for = "/index.js"
+  for = "/**"
   [headers.values]
-    Access-Control-Allow-Origin = "*"
     Access-Control-Allow-Methods = "GET, POST, OPTIONS"
     Access-Control-Allow-Headers = "Content-Type, Authorization, X-Requested-With"
     Access-Control-Allow-Credentials = "true"
