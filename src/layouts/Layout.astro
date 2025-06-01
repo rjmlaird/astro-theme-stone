@@ -27,7 +27,7 @@ const { description = "Default description", title = "Default title" } = Astro.p
     <script defer src="https://unpkg.com/@alpinejs/mask@3.13.10/dist/cdn.min.js"></script>
   </head>
 
-  <body x-bind:class="{ 'dark': isDark }" class="bg-primary-50 text-primary-950 antialiased transition">
+  <body x-bind:class="{ 'dark': $store.theme.isDark }" class="bg-primary-50 text-primary-950 antialiased transition">
     <Header />
     <main>
       <slot />
@@ -64,6 +64,18 @@ const { description = "Default description", title = "Default title" } = Astro.p
         color: var(--secondary-text);
       }
     </style>
+
+    <!-- Alpine Store Initialization -->
+    <script>
+      document.addEventListener("alpine:init", () => {
+        Alpine.store('theme', {
+          isDark: false, // Initialize the theme with a default value
+          toggle() {
+            this.isDark = !this.isDark; // Toggle the theme state
+          }
+        });
+      });
+    </script>
 
     <!-- View Transition Polyfill or Feature-Detect -->
     <script>
