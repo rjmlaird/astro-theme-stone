@@ -12,7 +12,7 @@ import Footer from '../components/layout/Footer.astro';
     <meta name="description" content={"hello"} />
     <title>{"Green Orbit Digital"}</title>
   <!-- Other head elements, like meta tags, stylesheets, etc. -->
-  <script src="/public/assets/js/alpinejs/dist/cdn.min.js" defer></script>
+  <script src="/assets/js/alpinejs/dist/cdn.min.js" defer></script>
 
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png" />
@@ -20,27 +20,27 @@ import Footer from '../components/layout/Footer.astro';
     <link rel="manifest" href="/site.webmanifest" />
 
     <!-- Alpine.js Core (ensure it's loaded before any Alpine directives) -->
-    <script defer src="public/assets/js/alpinejs/src/alpine.js" type="module"></script>
-    <script defer src="public/assets/js/alpinejs/dist/cdn.min.js" type="module"></script>
+    <script defer src="assets/js/alpinejs/src/alpine.js" type="module"></script>
 
     <!-- Alpine.js Plugins -->
-    <script defer src="public/assets/js/@alpinejs/collapse/dist/cdn.min.js" crossorigin="anonymous" ></script>
-    console.log(Alpine.plugin)  // Check if collapse and other plugins are in the list
+    <script defer src="assets/js/@alpinejs/collapse/dist/cdn.min.js" crossorigin="anonymous" ></script>
+    <script defer src="assets/js/alpinejs/dist/cdn.min.js" type="module"></script>
+    <script defer src="assets/js/alpinejs/src/plugin.js" crossorigin="anonymous"</script>    
+    <script defer src="assets/js/@alpinejs/anchor/dist/cdn.min.js" crossorigin="anonymous"></script>
+    <script defer src="assets/js/@alpinejs/intersect/dist/cdn.min.js" crossorigin="anonymous"></script>
+    <script defer src="assets/js/@alpinejs/csp/dist/cdn.min.js" crossorigin="anonymous"></script>
+    <script defer src="assets/js/@alpinejs/docs/dist/cdn.min.js" crossorigin="anonymous"></script>
+    <script defer src="assets/js/@alpinejs/focus/dist/cdn.min.js" crossorigin="anonymous"></script>
+    <script defer src="assets/js/@alpinejs/intersect/dist/cdn.min.js" crossorigin="anonymous"></script>
+    <script defer src="assets/js/@alpinejs/mask/dist/cdn.min.js" crossorigin="anonymous"></script>
+    <script defer src="assets/js/@alpinejs/morph/dist/cdn.min.js" crossorigin="anonymous"></script>
+    <script defer src="assets/js/@alpinejs/intersect/dist/cdn.min.js" crossorigin="anonymous"></script>
+    <script defer src="assets/js/@alpinejs/persist/dist/cdn.min.js" crossorigin="anonymous"></script>
+    <script defer src="assets/js/@alpinejs/resize/dist/cdn.min.js" crossorigin="anonymous"></script>
+    <script defer src="assets/js/@alpinejs/sort/dist/cdn.min.js" crossorigin="anonymous"></script>
+    <script defer src="assets/js/@alpinejs/ui/dist/cdn.min.js" crossorigin="anonymous"></script>
 
-    <script defer src="public/assets/js/alpinejs/src/plugin.js" crossorigin="anonymous"</script>    
-    <script defer src="public/assets/js/@alpinejs/anchor/dist/cdn.min.js" crossorigin="anonymous"></script>
-    <script defer src="public/assets/js/@alpinejs/intersect/dist/cdn.min.js" crossorigin="anonymous"></script>
-    <script defer src="public/assets/js/@alpinejs/csp/dist/cdn.min.js" crossorigin="anonymous"></script>
-    <script defer src="public/assets/js/@alpinejs/docs/dist/cdn.min.js" crossorigin="anonymous"></script>
-    <script defer src="public/assets/js/@alpinejs/focus/dist/cdn.min.js" crossorigin="anonymous"></script>
-    <script defer src="public/assets/js/@alpinejs/intersect/dist/cdn.min.js" crossorigin="anonymous"></script>
-    <script defer src="public/assets/js/@alpinejs/mask/dist/cdn.min.js" crossorigin="anonymous"></script>
-    <script defer src="public/assets/js/@alpinejs/morph/dist/cdn.min.js" crossorigin="anonymous"></script>
-    <script defer src="public/assets/js/@alpinejs/intersect/dist/cdn.min.js" crossorigin="anonymous"></script>
-    <script defer src="public/assets/js/@alpinejs/persist/dist/cdn.min.js" crossorigin="anonymous"></script>
-    <script defer src="public/assets/js/@alpinejs/resize/dist/cdn.min.js" crossorigin="anonymous"></script>
-    <script defer src="public/assets/js/@alpinejs/sort/dist/cdn.min.js" crossorigin="anonymous"></script>
-    <script defer src="public/assets/js/@alpinejs/ui/dist/cdn.min.js" crossorigin="anonymous"></script>
+    script defer src="assets/js/alpinejs/src/utils/warn.js" type="module"></script>
 
     <!-- Load CSS and JS for dark theme and view transition -->
     <style is:global>

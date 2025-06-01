@@ -1,6 +1,8 @@
 // Import Alpine.js plugins
+import Alpine from 'alpinejs'
 import anchor from '@alpinejs/anchor'
 import collapse from '@alpinejs/collapse'
+Alpine.plugin(collapse)  // This is the one we need!
 import csp from '@alpinejs/csp'
 //import docs from '@alpinejs/docs'
 import focus from '@alpinejs/focus'
@@ -14,7 +16,7 @@ import ui from '@alpinejs/ui'
 
 // Initialize Alpine.js plugins
 Alpine.plugin(anchor)
-Alpine.plugin(collapse)
+
 Alpine.plugin(csp)
 //Alpine.plugin(docs)
 Alpine.plugin(focus)
@@ -26,7 +28,10 @@ Alpine.plugin(resize)
 Alpine.plugin(sort)
 Alpine.plugin(ui)
 
-// Define Alpine.js object
+// Log the Alpine object to check if plugins were registered correctly
+console.log(Alpine.plugin)  // Check if collapse and other plugins are in the list
+
+// Define Alpine.js object (if necessary)
 let Alpine = {
     get reactive() { return reactive },
     get release() { return release },
@@ -59,9 +64,9 @@ let Alpine = {
     onElRemoved,
     closestRoot,
     destroyTree,
-    interceptor, // INTERNAL: not public API and is subject to change without major release.
-    transition, // INTERNAL
-    setStyles, // INTERNAL
+    interceptor,  // INTERNAL: not public API and is subject to change without major release.
+    transition,   // INTERNAL
+    setStyles,    // INTERNAL
     mutateDom,
     directive,
     entangle,
@@ -76,8 +81,8 @@ let Alpine = {
     magic,
     store,
     start,
-    clone, // INTERNAL
-    cloneNode, // INTERNAL
+    clone,        // INTERNAL
+    cloneNode,    // INTERNAL
     bound,
     $data,
     watch,
@@ -88,3 +93,6 @@ let Alpine = {
 
 // Export Alpine.js object
 export default Alpine
+
+// Start Alpine.js after logging
+Alpine.start()
