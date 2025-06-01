@@ -23,11 +23,14 @@ const { description = "Default description", title = "Default title" } = Astro.p
     <script defer src="/assets/js/alpine.js"></script>
 
     <!-- Alpine.js Plugins -->
-    <script defer src="/assets/js/alpine-collapse.js"></script>
-    <script defer src="/assets/js/alpine-focus.js"></script>
-    <script defer src="/assets/js/alpine-intersect.js"></script>
-    <script defer src="/assets/js/alpine-mask.js"></script>
-    
+    <script defer src="/assets/alpine/packages/alpinejs/builds/cdn.js"></script>
+    <script defer src="/assets/alpine/packages/collapse/builds/cdn.js"></script>
+    <script defer src="/assets/alpine/packages/focus/builds/cdn.js"></script>
+    <script defer src="/assets/alpine/packages/intersect/builds/cdn.js"></script>
+    <script defer src="/assets/alpine/packages/mask/builds/cdn.js"></script>
+  
+
+
     <!-- Load CSS and JS for dark theme and view transition -->
     <style is:global>
       [x-cloak] {
@@ -93,25 +96,52 @@ const { description = "Default description", title = "Default title" } = Astro.p
       });
     </script>
 
-    <!-- View Transition Script (Ensure polyfill or feature detection is applied) -->
     <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        // Check if ViewTransition API is supported by the browser
-        if ('startViewTransition' in document) {
-          // Create a ViewTransition for page transitions
-          const body = document.body;
-          const transition = new ViewTransition({
-            root: body, 
-            mode: "default", 
-          });
+  document.addEventListener("DOMContentLoaded", () => {
+    // Check if the ViewTransition API is supported
+    if ("startViewTransition" in document) {
+      const body = document.body;
 
-          transition.enter();  // Start transition on page load
-          console.log("✅ ViewTransition initialized.");
-        } else {
-          console.warn("⚠️ ViewTransition API not supported.");
-        }
+      // Use the ViewTransition API if supported
+      const transition = body.startViewTransition({
+        mode: 'default',  // You can adjust the mode depending on your needs
       });
-    </script>
+
+      // Apply the transition (this might vary based on your desired behavior)
+      transition.enter().then(() => {
+        console.log("✅ View transition completed.");
+      }).catch((error) => {
+        console.error("⚠️ Error during transition: ", error);
+      });
+    } else {
+      // Fallback to a default transition (e.g., a simple CSS fade-in)
+      console.log("⚠️ ViewTransition API not supported. Falling back to CSS transition.");
+      
+      // Add a CSS class to animate the fallback transition
+      document.body.classList.add('fallback-transition');
+      
+      // Optionally, delay the fallback transition so it's visually smooth
+      setTimeout(() => {
+        document.body.classList.remove('fallback-transition');
+        console.log("✅ Fallback transition completed.");
+      }, 1000); // Adjust timing as necessary
+    }
+  });
+</script>
+
+<style>
+  /* Fallback CSS transition */
+  .fallback-transition {
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+  }
+
+  /* Once the fallback transition completes, make it fully visible */
+  body {
+    opacity: 1;
+  }
+</style>
+
     
     <!-- Debugging for Alpine.js Initialization -->
     <script>
