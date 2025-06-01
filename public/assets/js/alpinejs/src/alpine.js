@@ -14,6 +14,11 @@ import resize from '@alpinejs/resize'
 import sort from '@alpinejs/sort'
 import ui from '@alpinejs/ui'
 
+import store from 'store'
+import theme from 'theme'
+import toggle from 'toggle'
+import warn from 'warn'
+
 // Initialize Alpine.js plugins
 Alpine.plugin(anchor)
 
