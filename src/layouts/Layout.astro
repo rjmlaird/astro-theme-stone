@@ -68,6 +68,7 @@ const { description = "Default description", title = "Default title" } = Astro.p
     <!-- Alpine Store Initialization (for theme management) -->
     <script>
       document.addEventListener("alpine:init", () => {
+        // Initialize the theme store with default state
         Alpine.store('theme', {
           isDark: false,  // Default theme is light
           toggle() {
@@ -82,7 +83,7 @@ const { description = "Default description", title = "Default title" } = Astro.p
     <!-- Alpine.js Initialization (ensure Alpine is fully loaded) -->
     <script>
       document.addEventListener("DOMContentLoaded", () => {
-        // Make sure Alpine is ready before we do anything with it
+        // Ensure Alpine is ready before we do anything with it
         if (window.Alpine) {
           window.Alpine.start();
           console.log("✅ Alpine.js started.");
