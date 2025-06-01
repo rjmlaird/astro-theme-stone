@@ -3,6 +3,7 @@ import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
 ---
 
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -17,15 +18,16 @@ import Footer from '../components/layout/Footer.astro';
     <link rel="manifest" href="/site.webmanifest" />
 
       <!-- Alpine.js Core (ensure it's loaded before any Alpine directives) -->
-    <script defer src="https://github.com/alpinejs/alpine/tree/main/packages/alpinejs/src/alpine.js"></script>
+    <script defer src="https://github.com/alpinejs/alpine/blob/e363181057b3e71e5c03d2b88db576d5094be1c8/packages/alpinejs/src/alpine.js"></script>
 
     <!-- Alpine.js Plugins -->
-    <script defer src="https://github.com/alpinejs/alpine/blob/main/packages/alpinejs/src/plugin.js"</script>    
-    <script defer src="https://github.com/alpinejs/alpine/tree/main/packages/alpinejs/src/index.js"></script>
-    <script defer src="https://github.com/alpinejs/alpine/tree/main/packages/collapse/src/index.js"></script>
-    <script defer src="https://github.com/alpinejs/alpine/tree/main/packages/focus/src/index.js"></script>
-    <script defer src="https://github.com/alpinejs/alpine/tree/main/packages/intersect/src/index.js"></script>
-    <script defer src="https://github.com/alpinejs/alpine/tree/main/packages/mask/src/index.js"></script>
+    <script defer src="https://github.com/alpinejs/alpine/blob/e363181057b3e71e5c03d2b88db576d5094be1c8/packages/alpinejs/src/plugin.js"</script>    
+    <script defer src="https://github.com/alpinejs/alpine/blob/e363181057b3e71e5c03d2b88db576d5094be1c8/packages/alpinejs/src/index.js"></script>
+    <script defer src="https://github.com/alpinejs/alpine/blob/e363181057b3e71e5c03d2b88db576d5094be1c8/packages/collapse/src/index.js"></script>
+    <script defer src="https://github.com/alpinejs/alpine/blob/e363181057b3e71e5c03d2b88db576d5094be1c8/packages/focus/src/index.js"></script>
+    <script defer src="https://github.com/alpinejs/alpine/blob/e363181057b3e71e5c03d2b88db576d5094be1c8/packages/intersect/src/index.js"></script>
+    <script defer src="https://github.com/alpinejs/alpine/blob/e363181057b3e71e5c03d2b88db576d5094be1c8/packages/mask/src/index.js"></script>
+
 
     <!-- Load CSS and JS for dark theme and view transition -->
     <style is:global>
@@ -62,11 +64,10 @@ import Footer from '../components/layout/Footer.astro';
       <slot />
     </main>
     <Footer />
-    
+
     <!-- Alpine Store Initialization (for theme management) -->
     <script>
       document.addEventListener("alpine:init", () => {
-        // Initialize the theme store with default state
         Alpine.store('theme', {
           isDark: false,  // Default theme is light
           toggle() {
@@ -95,12 +96,12 @@ import Footer from '../components/layout/Footer.astro';
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         // Check if the ViewTransition API is supported
-        if ("startViewTransition" in document) {
+        if (document.body && "startViewTransition" in document.body) {
           const body = document.body;
 
           // Use the ViewTransition API if supported
           const transition = body.startViewTransition({
-            mode: 'default',  // You can adjust the mode depending on your needs
+            mode: 'default',  // Adjust the mode depending on your needs
           });
 
           // Apply the transition (this might vary based on your desired behavior)
@@ -146,4 +147,3 @@ import Footer from '../components/layout/Footer.astro';
     </script>
   </body>
 </html>
-
