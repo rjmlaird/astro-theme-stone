@@ -9,8 +9,7 @@ export default defineConfig({
   },
   integrations: [tailwind(), compress()],
   buildOptions: {
-    // Set the output directory for the build
-    output: './dist',  // Make sure the build output is placed in 'dist'
-    // Optional: You can configure other build-related options as needed
+    // Update the output directory to your specified path
+    output: '/Volumes/DevProjects/greenorbitspace/greenorbit-web/node_modules/@alpinejs/collapse/dist',
   },
 });
