@@ -1,6 +1,4 @@
 ---
-import '@fontsource/radnika-next/radnika-next-medium.css';
-//import '@fontsource/radnika-next/latin-500.css';
 import { ViewTransitions } from 'astro:transitions';
 import Footer from '../components/layout/Footer.astro';
 import Header from '../components/layout/Header.astro';
@@ -28,6 +26,10 @@ const { description, title } = Astro.props;
     <meta name="description" content={description} />
     <title>{title}</title>
     <ViewTransitions />
+
+    <!-- Include the local font files -->
+    <link rel="stylesheet" href="/fonts/radnika-next/radnika-next-regular.css">
+    <link rel="stylesheet" href="/fonts/radnika-next/radnika-next-medium.css">
   </head>
   <body class="bg-primary-50 text-primary-950 dark:bg-primary-950 dark:text-primary-200 antialiased transition">
     <Header />
