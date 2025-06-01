@@ -77,18 +77,25 @@ const { description = "Default description", title = "Default title" } = Astro.p
     <script type="module">
       document.addEventListener("DOMContentLoaded", () => {
         if (window.Alpine) {
-          window.Alpine.start();
+          // Initialize Alpine.js
+          Alpine.start();
+
+          // Initialize Plugins after Alpine is ready
+          import('./node_modules/@alpinejs/collapse/src/index.js');
+          import('./node_modules/@alpinejs/focus/src/index.js');
+          import('./node_modules/@alpinejs/intersect/src/index.js');
+          import('./node_modules/@alpinejs/mask/src/index.js');
         } else {
-          console.error("Alpine.js not loaded");
+          console.error("Alpine.js not loaded.");
         }
       });
     </script>
 
     <!-- View Transitions (native browser support) -->
     <script type="module">
-      if ('ViewTransition' in window) {
-        document.addEventListener("DOMContentLoaded", () => {
-          // Listen for the page transition event
+      document.addEventListener("DOMContentLoaded", () => {
+        // Check if the ViewTransition API is supported in the browser
+        if ('ViewTransition' in window) {
           const body = document.body;
           const transition = new ViewTransition({
             root: body, // apply transition to body
@@ -97,12 +104,10 @@ const { description = "Default description", title = "Default title" } = Astro.p
 
           // Start the transition when navigating
           transition.enter();
-
-          // You can customize how transitions work here
-        });
-      } else {
-        console.warn("ViewTransition is not supported in this browser");
-      }
+        } else {
+          console.warn("ViewTransition API is not supported in this browser.");
+        }
+      });
     </script>
   </body>
 </html>
