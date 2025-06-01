@@ -5,6 +5,15 @@ import Header from '../components/layout/Header.astro';
 const { description = "Default description", title = "Default title" } = Astro.props;
 ---
 
+<!-- Alpine.js Core -->
+    <script type="module" src="./node_modules/alpinejs/src/alpine.js" defer></script>
+
+    <!-- Alpine.js Plugins -->
+    <script type="module" src="./node_modules/@alpinejs/collapse/src/index.js" defer></script>
+    <script type="module" src="./node_modules/@alpinejs/focus/src/index.js" defer></script>
+    <script type="module" src="./node_modules/@alpinejs/intersect/src/index.js" defer></script>
+    <script type="module" src="./node_modules/@alpinejs/mask/src/index.js" defer></script>
+
 <!DOCTYPE html>
 <html lang="en" x-data="theme">
   <head>
@@ -64,14 +73,7 @@ const { description = "Default description", title = "Default title" } = Astro.p
       }
     </style>
 
-    <!-- Alpine.js Core -->
-    <script type="module" src="./node_modules/alpinejs/src/alpine.js" defer></script>
-
-    <!-- Alpine.js Plugins -->
-    <script type="module" src="./node_modules/@alpinejs/collapse/src/index.js" defer></script>
-    <script type="module" src="./node_modules/@alpinejs/focus/src/index.js" defer></script>
-    <script type="module" src="./node_modules/@alpinejs/intersect/src/index.js" defer></script>
-    <script type="module" src="./node_modules/@alpinejs/mask/src/index.js" defer></script>
+    
 
     <!-- View Transitions (native browser support) -->
     <script type="module">
