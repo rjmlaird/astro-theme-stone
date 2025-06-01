@@ -75,7 +75,6 @@ const { description = "Default description", title = "Default title" } = Astro.p
           }
         });
 
-        // Confirm that Alpine has been initialized
         console.log("✅ Alpine.js initialized and theme store created.");
       });
     </script>
@@ -83,9 +82,13 @@ const { description = "Default description", title = "Default title" } = Astro.p
     <!-- Alpine.js Initialization (ensure Alpine is fully loaded) -->
     <script>
       document.addEventListener("DOMContentLoaded", () => {
-        // Alpine is ready
-        window.Alpine.start();
-        console.log("✅ Alpine.js started.");
+        // Make sure Alpine is ready before we do anything with it
+        if (window.Alpine) {
+          window.Alpine.start();
+          console.log("✅ Alpine.js started.");
+        } else {
+          console.error("⚠️ Alpine.js failed to load.");
+        }
       });
     </script>
 
