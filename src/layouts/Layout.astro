@@ -9,6 +9,7 @@ import AlpineFocus from '@alpinejs/focus';
 import AlpineIntersect from '@alpinejs/intersect';
 import AlpineMask from '@alpinejs/mask';
 
+
 interface Props {
   description: string;
   title: string;
@@ -30,38 +31,6 @@ const { description, title } = Astro.props;
     <meta name="description" content={description} />
     <title>{title}</title>
     <ViewTransitions />
-    
-    <!-- Alpine.js Core -->
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.9/dist/cdn.min.js" defer></script>
-
-    <!-- Alpine.js Plugins -->
-    <script src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.0.0/dist/collapse.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@3.0.0/dist/focus.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.0.0/dist/intersect.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/@alpinejs/mask@3.0.0/dist/mask.min.js" defer></script>
-
-    <!-- Initialize Alpine.js & Dark Mode -->
-    <script type="module">
-      window.Alpine = Alpine;
-      Alpine.plugin(AlpineCollapse);
-      Alpine.plugin(AlpineFocus);
-      Alpine.plugin(AlpineIntersect);
-      Alpine.plugin(AlpineMask);
-
-      Alpine.store('theme', {
-        init() {
-          const storedTheme = localStorage.getItem('theme');
-          this.isDark = storedTheme ? storedTheme === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
-        },
-        isDark: false,
-        toggle() {
-          this.isDark = !this.isDark;
-          localStorage.setItem('theme', this.isDark ? 'dark' : 'light');
-        },
-      });
-
-      Alpine.start();
-    </script>
   </head>
 
   <body x-bind:class="{ 'dark': isDark }" class="bg-primary-50 text-primary-950 antialiased transition">
@@ -108,5 +77,37 @@ const { description, title } = Astro.props;
         color: var(--secondary-text);
       }
     </style>
+
+    <!-- Alpine.js Core & Plugins (local scripts) -->
+    <script type="module" defer src="/alpine.js"></script>
+    <script type="module" defer src="/alpine-collapse.js"></script>
+    <script type="module" defer src="/alpine-focus.js"></script>
+    <script type="module" defer src="/alpine-intersect.js"></script>
+    <script type="module" defer src="/alpine-mask.js"></script>
+
+    <script type="module">
+      // Register plugins with Alpine.js
+      Alpine.plugin(AlpineCollapse);
+      Alpine.plugin(AlpineFocus);
+      Alpine.plugin(AlpineIntersect);
+      Alpine.plugin(AlpineMask);
+
+      // Dark Mode Store
+      Alpine.store('theme', {
+        init() {
+          const storedTheme = localStorage.getItem('theme');
+          this.isDark = storedTheme ? storedTheme === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+        },
+        isDark: false,
+        toggle() {
+          this.isDark = !this.isDark;
+          localStorage.setItem('theme', this.isDark ? 'dark' : 'light');
+        },
+      });
+
+      // Initialize Alpine.js
+      window.Alpine = Alpine;
+      Alpine.start();
+    </script>
   </body>
 </html>
