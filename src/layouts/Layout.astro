@@ -77,33 +77,28 @@ const { description, title } = Astro.props;
       }
     </style>
 
-    <!-- Load Alpine.js Collapse Plugin before Alpine.js core -->
-    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.0.0/dist/collapse.min.js"></script>
-    <script defer type="module">
+    <!-- Alpine.js and Collapse Plugin -->
+    <script type="module">
       import * as Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs@3.0.0/dist/cdn.min.js';
-      Alpine.plugin(window.AlpineCollapse); // Make sure Collapse plugin is initialized correctly
+      import { collapse } from 'https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.0.0/dist/collapse.min.js';
 
+      // Use the Collapse plugin with Alpine.js v3+
+      Alpine.plugin(collapse);
+
+      // Define the theme store
       Alpine.store('theme', {
         init() {
-          this.isDark = (() => {
-            if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-              return localStorage.getItem('theme') === 'dark';
-            }
-            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-              return true;
-            }
-            return false;
-          })();
+          const storedTheme = localStorage.getItem('theme');
+          this.isDark = storedTheme ? storedTheme === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
         },
-
         isDark: false,
-
         toggle() {
           this.isDark = !this.isDark;
           localStorage.setItem('theme', this.isDark ? 'dark' : 'light');
         },
       });
 
+      // Start Alpine.js
       window.Alpine = Alpine;
       Alpine.start();
     </script>
