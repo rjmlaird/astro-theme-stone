@@ -1,14 +1,17 @@
+---
 import '@fontsource/radnika-next/latin-400.css';
 import '@fontsource/radnika-next/latin-500.css';
 import { ViewTransitions } from 'astro:transitions';
 import Footer from '../components/layout/Footer.astro';
 import Header from '../components/layout/Header.astro';
 
+// Declare the Props interface
 interface Props {
   description: string;
   title: string;
 }
 
+// Extract props from Astro
 const { description, title } = Astro.props;
 ---
 
