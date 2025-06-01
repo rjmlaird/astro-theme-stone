@@ -86,10 +86,16 @@ const { description, title } = Astro.props;
     <script type="module" src="/path/to/alpine-intersect.js" defer></script>
     <script type="module" src="/path/to/alpine-mask.js" defer></script>
 
-    <!-- Alpine Initialization Script -->
-    <script type="module">
-      // Initialize Alpine.js and register plugins
-      window.Alpine = Alpine;
-      Alpine.plugin(AlpineCollapse);
-      Alpine.plugin(AlpineFocus);
-      Alpine.plugin(AlpineIntersect
+<!-- Alpine Initialization Script -->
+<script type="module">
+  // Initialize Alpine.js and register plugins
+  window.Alpine = Alpine;
+  Alpine.plugin(AlpineCollapse);
+  Alpine.plugin(AlpineFocus);
+  Alpine.plugin(AlpineIntersect);
+  Alpine.plugin(AlpineMask);
+
+  // Start Alpine.js
+  Alpine.start();
+</script>
+
