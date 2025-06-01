@@ -1,3 +1,10 @@
+---
+import Footer from '../components/layout/Footer.astro';
+import Header from '../components/layout/Header.astro';
+
+const { description = "Default description", title = "Default title" } = Astro.props;
+---
+
 <!DOCTYPE html>
 <html lang="en" x-data="theme">
   <head>
@@ -10,7 +17,6 @@
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
     <title>{title}</title>
-    <ViewTransitions />
   </head>
 
   <body x-bind:class="{ 'dark': isDark }" class="bg-primary-50 text-primary-950 antialiased transition">
@@ -67,18 +73,28 @@
     <script type="module" src="/path/to/alpine-intersect.js" defer></script>
     <script type="module" src="/path/to/alpine-mask.js" defer></script>
 
+    <!-- View Transitions (native browser support) -->
+    <script type="module">
+      document.addEventListener("DOMContentLoaded", () => {
+        // Listen for the page transition event
+        const body = document.body;
+        const transition = new ViewTransition({
+          root: body, // apply transition to body
+          mode: "default", // set transition mode
+        });
+
+        // Start the transition when navigating
+        transition.enter();
+
+        // You can customize how transitions work here
+      });
+    </script>
+
     <!-- Alpine Initialization Script -->
     <script type="module">
       // Ensure Alpine.js is fully loaded before initializing
       document.addEventListener("DOMContentLoaded", () => {
-        // Initialize Alpine.js and register plugins
         window.Alpine = Alpine;
-        Alpine.plugin(AlpineCollapse);
-        Alpine.plugin(AlpineFocus);
-        Alpine.plugin(AlpineIntersect);
-        Alpine.plugin(AlpineMask);
-
-        // Start Alpine.js
         Alpine.start();
       });
     </script>
