@@ -1,18 +1,15 @@
 ---
-import Footer from '../components/layout/Footer.astro';
-import Header from '../components/layout/Header.astro';
-
-const { description = "Default description", title = "Default title" } = Astro.props;
+import Header from '../components/Header.astro';  // Adjust the path as needed
+import Footer from '../components/Footer.astro';  // Adjust the path as needed
 ---
 
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="description" content={description} />
-    <title>{title}</title>
+    <meta name="description" content={"hello"} />
+    <title>{"title"}</title>
 
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png" />
@@ -20,16 +17,13 @@ const { description = "Default description", title = "Default title" } = Astro.p
     <link rel="manifest" href="/site.webmanifest" />
 
     <!-- Alpine.js Core (ensure it's loaded before any Alpine directives) -->
-    <script defer src="https://github.com/alpinejs/alpine/tree/main/packages/alpinejs/src/alpine.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.10.2/dist/cdn.min.js"></script>
 
     <!-- Alpine.js Plugins -->
-    <script defer src="https://github.com/alpinejs/alpine/tree/main/packages/alpinejs/src/index.js"></script>
-    <script defer src="https://github.com/alpinejs/alpine/tree/main/packages/collapse/src/index.js"></script>
-    <script defer src="https://github.com/alpinejs/alpine/tree/main/packages/focus/src/index.js"></script>
-    <script defer src="https://github.com/alpinejs/alpine/tree/main/packages/intersect/src/index.js"></script>
-    <script defer src="https://github.com/alpinejs/alpine/tree/main/packages/mask/src/index.js"></script>
-  
-
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@2.0.0/dist/cdn.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@2.0.0/dist/cdn.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@2.0.0/dist/cdn.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/mask@2.0.0/dist/cdn.min.js"></script>
 
     <!-- Load CSS and JS for dark theme and view transition -->
     <style is:global>
@@ -97,51 +91,50 @@ const { description = "Default description", title = "Default title" } = Astro.p
     </script>
 
     <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    // Check if the ViewTransition API is supported
-    if ("startViewTransition" in document) {
-      const body = document.body;
+      document.addEventListener("DOMContentLoaded", () => {
+        // Check if the ViewTransition API is supported
+        if ("startViewTransition" in document) {
+          const body = document.body;
 
-      // Use the ViewTransition API if supported
-      const transition = body.startViewTransition({
-        mode: 'default',  // You can adjust the mode depending on your needs
+          // Use the ViewTransition API if supported
+          const transition = body.startViewTransition({
+            mode: 'default',  // You can adjust the mode depending on your needs
+          });
+
+          // Apply the transition (this might vary based on your desired behavior)
+          transition.enter().then(() => {
+            console.log("✅ View transition completed.");
+          }).catch((error) => {
+            console.error("⚠️ Error during transition: ", error);
+          });
+        } else {
+          // Fallback to a default transition (e.g., a simple CSS fade-in)
+          console.log("⚠️ ViewTransition API not supported. Falling back to CSS transition.");
+          
+          // Add a CSS class to animate the fallback transition
+          document.body.classList.add('fallback-transition');
+          
+          // Optionally, delay the fallback transition so it's visually smooth
+          setTimeout(() => {
+            document.body.classList.remove('fallback-transition');
+            console.log("✅ Fallback transition completed.");
+          }, 1000); // Adjust timing as necessary
+        }
       });
+    </script>
 
-      // Apply the transition (this might vary based on your desired behavior)
-      transition.enter().then(() => {
-        console.log("✅ View transition completed.");
-      }).catch((error) => {
-        console.error("⚠️ Error during transition: ", error);
-      });
-    } else {
-      // Fallback to a default transition (e.g., a simple CSS fade-in)
-      console.log("⚠️ ViewTransition API not supported. Falling back to CSS transition.");
-      
-      // Add a CSS class to animate the fallback transition
-      document.body.classList.add('fallback-transition');
-      
-      // Optionally, delay the fallback transition so it's visually smooth
-      setTimeout(() => {
-        document.body.classList.remove('fallback-transition');
-        console.log("✅ Fallback transition completed.");
-      }, 1000); // Adjust timing as necessary
-    }
-  });
-</script>
+    <style>
+      /* Fallback CSS transition */
+      .fallback-transition {
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+      }
 
-<style>
-  /* Fallback CSS transition */
-  .fallback-transition {
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-  }
-
-  /* Once the fallback transition completes, make it fully visible */
-  body {
-    opacity: 1;
-  }
-</style>
-
+      /* Once the fallback transition completes, make it fully visible */
+      body {
+        opacity: 1;
+      }
+    </style>
     
     <!-- Debugging for Alpine.js Initialization -->
     <script>
