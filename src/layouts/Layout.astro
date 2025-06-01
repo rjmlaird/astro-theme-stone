@@ -92,11 +92,13 @@ const { description, title } = Astro.props;
       // Define the theme store for dark mode
       Alpine.store('theme', {
         init() {
+          // Retrieve theme from localStorage, or use the system's preference
           const storedTheme = localStorage.getItem('theme');
           this.isDark = storedTheme ? storedTheme === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
         },
         isDark: false,
         toggle() {
+          // Toggle theme between light and dark
           this.isDark = !this.isDark;
           localStorage.setItem('theme', this.isDark ? 'dark' : 'light');
         },
