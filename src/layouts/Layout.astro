@@ -14,7 +14,7 @@ const { description, title } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="en" x-cloak x-data="{ 'dark': $store.theme.isDark }">
+<html lang="en" x-cloak x-data="{ dark: $store.theme.isDark }">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
@@ -27,14 +27,22 @@ const { description, title } = Astro.props;
     <title>{title}</title>
     <ViewTransitions />
   </head>
+
   <body class="bg-primary-50 text-primary-950 dark:bg-primary-950 dark:text-primary-200 antialiased transition">
+    <!-- Header Component -->
     <Header />
+
+    <!-- Main Content Area -->
     <main>
       <slot />
     </main>
+
+    <!-- Footer Component -->
     <Footer />
-    
+
+    <!-- Global Styles -->
     <style is:global>
+      /* Hide elements with x-cloak attribute */
       [x-cloak] {
         display: none !important;
       }
@@ -55,38 +63,39 @@ const { description, title } = Astro.props;
         --secondary-text: #30c6d3; /* Cool Ocean Blue */
       }
 
-      /* Global Styles */
+      /* Global Body Styles */
       body {
         background-color: var(--primary-bg);
         color: var(--primary-text);
-        font-family: 'Radnika Next', sans-serif; /* Applying Radnika Next font */
+        font-family: 'Radnika Next', sans-serif;
       }
 
-      header {
-        background-color: var(--secondary-bg);
-      }
-
-      footer {
+      /* Header and Footer Styles */
+      header, footer {
         background-color: var(--secondary-bg);
         color: var(--secondary-text);
       }
 
+      /* Button Styles */
       .button {
         background-color: var(--secondary-bg);
         color: var(--primary-bg);
       }
     </style>
-    
+
     <!-- Alpine.js and Collapse Plugin -->
     <script type="module">
       import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js';
       import collapse from 'https://cdn.jsdelivr.net/npm/@alpinejs/collapse@2.8.2/dist/collapse.min.js';
 
+      // Activate Collapse plugin
       Alpine.plugin(collapse);
 
+      // Store for managing dark mode toggle
       Alpine.store('theme', {
         init() {
           this.isDark = (() => {
+            // Check localStorage or system preferences for dark mode
             if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
               return localStorage.getItem('theme') === 'dark';
             }
@@ -99,12 +108,14 @@ const { description, title } = Astro.props;
 
         isDark: false,
 
+        // Toggle dark/light mode
         toggle() {
           this.isDark = !this.isDark;
           localStorage.setItem('theme', this.isDark ? 'dark' : 'light');
         },
       });
 
+      // Initialize Alpine.js
       window.Alpine = Alpine;
       Alpine.start();
     </script>
