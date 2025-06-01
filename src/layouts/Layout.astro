@@ -78,12 +78,10 @@ const { description, title } = Astro.props;
     </style>
 
     <!-- Load Alpine.js Collapse Plugin before Alpine.js core -->
-    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.0.0/dist/cdn.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.0.0/dist/cdn.min.js"></script>
-
-    <script type="module">
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.0.0/dist/collapse.min.js"></script>
+    <script defer type="module">
       import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs@3.0.0/dist/cdn.min.js';
-      Alpine.plugin(window.AlpineCollapse); // Ensure Collapse plugin is correctly initialized
+      Alpine.plugin(window.AlpineCollapse); // Make sure Collapse plugin is initialized correctly
 
       Alpine.store('theme', {
         init() {
