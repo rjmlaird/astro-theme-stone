@@ -79,13 +79,16 @@ const { description, title } = Astro.props;
 
     <!-- Alpine.js and Collapse Plugin -->
     <script type="module">
-      import * as Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js';
-      import { collapse } from 'https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js';
+      // Import Alpine.js from CDN
+      import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js';
 
-      // Use the Collapse plugin with Alpine.js v3+
+      // Manually import Collapse plugin
+      import { collapse } from 'https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.0.0/dist/cdn.min.js';
+
+      // Use the Collapse plugin with Alpine.js v3
       Alpine.plugin(collapse);
 
-      // Define the theme store
+      // Define the theme store for dark mode
       Alpine.store('theme', {
         init() {
           const storedTheme = localStorage.getItem('theme');
