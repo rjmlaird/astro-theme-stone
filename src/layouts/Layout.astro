@@ -1,4 +1,3 @@
----
 import '@fontsource/inter/latin-400.css';
 import '@fontsource/inter/latin-500.css';
 import { ViewTransitions } from 'astro:transitions';
@@ -38,6 +37,42 @@ const { description, title } = Astro.props;
     <style is:global>
       [x-cloak] {
         display: none !important;
+      }
+      
+      /* Light Theme Colors */
+      :root {
+        --primary-bg: #ffffff; /* Pure White */
+        --primary-text: #127780; /* Deep Teal */
+        --secondary-bg: #15eda3; /* Vibrant Green */
+        --secondary-text: #0fc083; /* Bold Turquoise */
+      }
+
+      /* Dark Theme Colors */
+      [x-cloak].dark {
+        --primary-bg: #0c4d53; /* Deep Space Green-Blue */
+        --primary-text: #ffffff; /* Pure White */
+        --secondary-bg: #2cffb7; /* Luminous Aqua */
+        --secondary-text: #30c6d3; /* Cool Ocean Blue */
+      }
+
+      /* Global Styles */
+      body {
+        background-color: var(--primary-bg);
+        color: var(--primary-text);
+      }
+
+      header {
+        background-color: var(--secondary-bg);
+      }
+
+      footer {
+        background-color: var(--secondary-bg);
+        color: var(--secondary-text);
+      }
+
+      .button {
+        background-color: var(--secondary-bg);
+        color: var(--primary-bg);
       }
     </style>
     <script>
