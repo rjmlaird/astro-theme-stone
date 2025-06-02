@@ -93,7 +93,7 @@ function modifierValue(modifiers, key, fallback) {
     if (! rawValue) return fallback
 
     if (key === 'duration') {
-        // Support x-collapse.duration.500ms && duration.500
+         Support x-collapse.duration.500ms && duration.500
         let match = rawValue.match(/([0-9]+)ms/)
         if (match) return match[1]
     }
